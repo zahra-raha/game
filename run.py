@@ -1,12 +1,12 @@
 import random
+from random_word import RandomWords
 
 
-def runRPS(game):
+def runRPS():
     """
-    this is the main function to play Rock, Paper,
+    This function is the Rock, Paper, Scissors Game
     """
     choices = ["Rock", "Paper", "Scissors"]
-    print(f"You selected {game}. Good Luck!\n")
     user_score = 0
     computer_score = 0
     contin = True
@@ -68,6 +68,23 @@ def runRPS(game):
     print(f"computer final score: {computer_score}\n") 
     print("Thanks for playing")           
 
+def runGTW():
+    """
+    This function provide list of alphabets to user and user shpuld guess 
+    the word
+    """
+    print("Guess te word with following letters.")
+    r = RandomWords()
+    word = r.get_random_word(hasDictionaryDef="true", minLength=3, maxLength=6)
+    letters = [x for x in word]
+    random.shuffle(letters)
+    print(letters)
+    user_guess = input()
+    if user_guess.lower() is word.lower():
+        print("good job, you found the word")
+    else:
+        print(f"{user_guess} is not the right answer, it's {word}")
+
 
 def main():
     """
@@ -78,10 +95,15 @@ def main():
     print(f"Hello {USER_NAME}. Welcome play zoon!")
     print("Lets select with game you wanna play today")
     print("Enter 1 for  Rock, Paper, Scissors!")
+    print("Enter 2 for guess the word!")
     game = input()
 
     if game == '1':
-        runRPS(game)
+        print(f"You selected Rock, Paper, Scissors. Good Luck!\n")
+        runRPS()
+    elif game == '2':
+        print(f"You selected guess the word. Good Luck!\n")
+        runGTW()
 
 
 print("Lets have some fan today!")

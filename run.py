@@ -1,5 +1,6 @@
 import random
 from random_word import RandomWords
+import os
 
 
 def runRPS():
@@ -68,22 +69,46 @@ def runRPS():
     print(f"computer final score: {computer_score}\n") 
     print("Thanks for playing")           
 
+
+def increaseScore(scoreToAdd, mainScore):
+    mainScore += int(scoreToAdd)
+
+
+def decreaseScore(scoreToRemove, mainScore):
+    mainScore -+ int(scoreToRemove)
+
+
 def runGTW():
     """
     This function provide list of alphabets to user and user shpuld guess 
     the word
     """
-    print("Guess te word with following letters.")
+    os.system('cls||clear')
+    print("1 : Easy")
+    print("2 : Medium")
+    print("3 : Hard")
+    level = input("Please select the level of the game\n")
+    score = 0
+    print("Guess the word with following letters.")
     r = RandomWords()
-    word = r.get_random_word(hasDictionaryDef="true", minLength=3, maxLength=6)
+    word = ""
+    if level == '1':
+        word = r.get_random_word(hasDictionaryDef="true", minLength=2, maxLength=5)
+    elif level == '2':
+        word = r.get_random_word(hasDictionaryDef="true", minLength=5, maxLength=7)
+    elif level == '3':
+        word = r.get_random_word(hasDictionaryDef="true", minLength=7)
+    
     letters = [x for x in word]
     random.shuffle(letters)
     print(letters)
     user_guess = input()
     if user_guess.lower() is word.lower():
-        print("good job, you found the word")
+        print("Good job, you found the word")
+        increaseScore(level, score)
     else:
         print(f"{user_guess} is not the right answer, it's {word}")
+        decreaseScore(level, score)
 
 
 def main():

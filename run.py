@@ -3,6 +3,13 @@ from random_word import RandomWords
 import os
 
 
+def clearTerminal():
+    """
+    Clears the terminal
+    """
+    os.system('cls||clear')
+
+
 def runRPS():
     """
     This function is the Rock, Paper, Scissors Game
@@ -16,6 +23,7 @@ def runRPS():
         while True:
             print(" 1 : Rock \n 2 : Paper\n 3 : Scissors")
             choice = input("Please choose 1, 2, 3 or enter e to exit:\n")
+            clearTerminal()
             if choice == '1':
                 user_choice = 'Rock'
                 break
@@ -27,6 +35,7 @@ def runRPS():
                 break
             elif choice.lower() == 'e':
                 contin = False
+                clearTerminal()
                 break
             else:
                 print("You entered envalid value\n")
@@ -67,7 +76,8 @@ def runRPS():
 
     print(f"your final score:     {user_score}") 
     print(f"computer final score: {computer_score}\n") 
-    print("Thanks for playing")           
+    print("Thanks for playing\n")    
+    main()       
 
 
 def increaseScore(scoreToAdd, mainScore):
@@ -75,7 +85,7 @@ def increaseScore(scoreToAdd, mainScore):
 
 
 def decreaseScore(scoreToRemove, mainScore):
-    mainScore -+ int(scoreToRemove)
+    mainScore -= int(scoreToRemove)
 
 
 def runGTW():
@@ -83,7 +93,7 @@ def runGTW():
     This function provide list of alphabets to user and user shpuld guess 
     the word
     """
-    os.system('cls||clear')
+    clearTerminal()
     print("1 : Easy")
     print("2 : Medium")
     print("3 : Hard")
@@ -115,14 +125,11 @@ def main():
     """
     Main program functions
     """
-    USER_NAME = input("Please enter your name: \n")
-
-    print(f"Hello {USER_NAME}. Welcome play zoon!")
-    print("Lets select with game you wanna play today")
+    print("Lets select with game you wanna play")
     print("Enter 1 for  Rock, Paper, Scissors!")
     print("Enter 2 for guess the word!")
     game = input()
-
+    clearTerminal()
     if game == '1':
         print(f"You selected Rock, Paper, Scissors. Good Luck!\n")
         runRPS()
@@ -131,7 +138,7 @@ def main():
         runGTW()
 
 
-print("Lets have some fan today!")
+print("Welcome, Lets have some fan today!")
 main()
 
 

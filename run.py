@@ -10,6 +10,21 @@ def clearTerminal():
     os.system('cls||clear')
 
 
+def validateData(valid_values):
+    """
+    check of the value entered by user is valid
+    """
+    while True:
+        try:
+            value = input()
+            if value not in valid_values:
+                raise ValueError(f"Please enter a value between {valid_values}")
+            else:
+                return value
+        except ValueError as error:
+            print(f"Invalid data: {error}, please try again.\n")
+
+
 def runRPS():
     """
     This function is the Rock, Paper, Scissors Game
@@ -17,28 +32,24 @@ def runRPS():
     choices = ["Rock", "Paper", "Scissors"]
     user_score = 0
     computer_score = 0
-    contin = True
 
-    while contin is True:
-        while True:
-            print(" 1 : Rock \n 2 : Paper\n 3 : Scissors")
-            choice = input("Please choose 1, 2, 3 or enter e to exit:\n")
-            clearTerminal()
-            if choice == '1':
-                user_choice = 'Rock'
-                break
-            elif choice == '2':
-                user_choice = 'Paper'
-                break
-            elif choice == '3':
-                user_choice = 'Scissors'
-                break
-            elif choice.lower() == 'e':
-                contin = False
-                clearTerminal()
-                break
-            else:
-                print("You entered envalid value\n")
+    while True:
+        print(" 1 : Rock \n 2 : Paper\n 3 : Scissors")
+        print("Please choose 1, 2, 3 or enter # to exit:")
+        choice = validateData(['1', '2', '3', '#'])
+        
+        clearTerminal()
+        if choice == '1':
+            user_choice = 'Rock'
+        elif choice == '2':
+            user_choice = 'Paper'
+        elif choice == '3':
+            user_choice = 'Scissors'
+        else:
+            print(f"your final score:     {user_score}") 
+            print(f"computer final score: {computer_score}\n") 
+            print("Thanks for playing\n")    
+            main() 
 
         computer_choice = random.choice(choices)
         print(f"you:     {user_choice} \ncomputer: {computer_choice} \n")
@@ -48,57 +59,55 @@ def runRPS():
         elif user_choice == "Rock":
             if computer_choice == "Paper":
                 print("you lost!")
-                computer_score += 1
+                computer_score = increaseScore(1, computer_score)
 
             if computer_choice == "Scissors":
                 print("you won!")
-                user_score += 1
+                user_score = increaseScore(1, user_score)
 
         elif user_choice == "Scissors":
             if computer_choice == "Rock":
                 print("you lost!")
-                computer_score += 1
+                computer_score = increaseScore(1, computer_score)
 
             if computer_choice == "Paper":
                 print("you won!")
-                user_score += 1
+                user_score = increaseScore(1, user_score)
 
         elif user_choice == "Paper":
             if computer_choice == "Rock":
                 print("you won!")
-                user_score += 1
+                user_score = increaseScore(1, user_score)
 
             if computer_choice == "Scissors":
                 print("you lost!")
-                computer_score += 1
+                computer_score = increaseScore(1, computer_score)
         print(f"your score:     {user_score} ")
         print(f"computer score: {computer_score}\n")
-
-    print(f"your final score:     {user_score}") 
-    print(f"computer final score: {computer_score}\n") 
-    print("Thanks for playing\n")    
-    main()       
+         
 
 
 def increaseScore(scoreToAdd, mainScore):
-    mainScore += int(scoreToAdd)
+    mainScore += scoreToAdd
+    return mainScore
 
 
-def decreaseScore(scoreToRemove, mainScore):
-    mainScore -= int(scoreToRemove)
-
-
-def runGTW():
+def runGTW(score):
     """
     This function provide list of alphabets to user and user shpuld guess 
     the word
     """
     clearTerminal()
-    print("1 : Easy")
-    print("2 : Medium")
-    print("3 : Hard")
-    level = input("Please select the level of the game\n")
-    score = 0
+    print("1 : Easy    | every win 1 score")
+    print("2 : Medium  | every win 2 score")
+    print("3 : Hard    | every win 3 score")
+    
+    print("Please select the level of the game or # to exit")
+    level = validateData(['1', '2', '3', '#'])
+    if level =='#':
+        print("Thank you for playing")
+        main()
+
     print("Guess the word with following letters.")
     r = RandomWords()
     word = ""
@@ -113,33 +122,49 @@ def runGTW():
     random.shuffle(letters)
     print(letters)
     user_guess = input()
-    if user_guess.lower() is word.lower():
+    if user_guess.lower() == word.lower():
         print("Good job, you found the word")
-        increaseScore(level, score)
+        score = increaseScore(int(level), score)
+        print(f'score: {score}')
     else:
         print(f"{user_guess} is not the right answer, it's {word}")
-        decreaseScore(level, score)
+        print(f'score: {score}')
+
+    print("Enter * to continue or # to exit")
+    a = validateData(['#', '*'])
+    if a == '*':
+        runGTW(score)
+    elif a == '#':
+        main()
+    
 
 
 def main():
     """
     Main program functions
     """
-    print("Lets select with game you wanna play")
+    print("Lets select which game you wanna play")
     print("Enter 1 for  Rock, Paper, Scissors!")
     print("Enter 2 for guess the word!")
-    game = input()
-    clearTerminal()
+    print("Enter # to exit")
+    games = ['1', '2', '#']
+    game = validateData(games)
+  
     if game == '1':
-        print(f"You selected Rock, Paper, Scissors. Good Luck!\n")
+        clearTerminal()
+        print("You selected Rock, Paper, Scissors. Good Luck!\n")
         runRPS()
     elif game == '2':
-        print(f"You selected guess the word. Good Luck!\n")
-        runGTW()
+        clearTerminal()
+        print("You selected guess the word. Good Luck!\n")
+        runGTW(0)
+    else :
+        print("Thank you for playing")
+        exit()
 
 
 print("Welcome, Lets have some fan today!")
 main()
-
+# https://cloud.smartdraw.com/?nsu=1
 
 

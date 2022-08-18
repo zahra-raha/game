@@ -52,6 +52,9 @@ def runRPS():
             main() 
 
         computer_choice = random.choice(choices)
+        if user_choice == computer_choice:
+            # just to reduce the posibility of same choices
+            computer_choice = random.choice(choices)
         print(f"you:     {user_choice} \ncomputer: {computer_choice} \n")
 
         if user_choice == computer_choice:
@@ -109,7 +112,7 @@ def runGTW(score):
         print("Thank you for playing")
         main()
 
-    print("Guess the word with following letters.")
+    print("Guess the word with all following letters.")
     r = RandomWords()
     word = ""
     if level == '1':

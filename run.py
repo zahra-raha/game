@@ -1,6 +1,6 @@
+import os
 import random
 from random_word import RandomWords
-import os
 
 
 def clearTerminal():
@@ -86,8 +86,9 @@ def runRPS():
         print(f"computer score: {computer_score}\n")
          
 
-
 def increaseScore(scoreToAdd, mainScore):
+    """ function to increase the mainScore by scoreTo Add"""
+
     mainScore += scoreToAdd
     return mainScore
 
@@ -104,7 +105,7 @@ def runGTW(score):
     
     print("Please select the level of the game or # to exit")
     level = validateData(['1', '2', '3', '#'])
-    if level =='#':
+    if level == '#':
         print("Thank you for playing")
         main()
 
@@ -138,7 +139,6 @@ def runGTW(score):
         main()
     
 
-
 def main():
     """
     Main program functions
@@ -158,7 +158,7 @@ def main():
         clearTerminal()
         print("You selected guess the word. Good Luck!\n")
         runGTW(0)
-    else :
+    else:
         print("Thank you for playing")
         exit()
 

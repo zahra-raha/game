@@ -168,6 +168,5 @@ def main():
 
 print("Welcome, Lets have some fan today!")
 main()
-# https://cloud.smartdraw.com/?nsu=1
 
 
